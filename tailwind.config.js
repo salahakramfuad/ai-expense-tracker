@@ -6,7 +6,11 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
-    extend: {}
+    extend: {
+      colors: {
+        primary: { default: '#4A044E' } // Tailwind's purple-900 color
+      }
+    }
   },
   plugins: []
 }

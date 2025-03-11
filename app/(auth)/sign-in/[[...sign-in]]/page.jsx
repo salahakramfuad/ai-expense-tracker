@@ -1,11 +1,13 @@
+'use client'
+
 import React from 'react'
 import Image from 'next/image'
 import { SignIn } from '@clerk/nextjs'
 
 const Page = () => {
   return (
-    <div style={{ display: 'flex', height: '100vh' }}>
-      <div style={{ flex: 1, position: 'relative' }}>
+    <div className='flex h-screen bg-purple-50'>
+      <div className='flex-1 relative'>
         <Image
           src='/Images/signin.jpg'
           alt='Sign In Image'
@@ -13,15 +15,8 @@ const Page = () => {
           objectFit='cover'
         />
       </div>
-      <div
-        style={{
-          flex: 1,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      >
-        <SignIn />
+      <div className='flex-1 flex justify-center items-center'>
+        <SignIn redirectUrl='/dashboard' />
       </div>
     </div>
   )

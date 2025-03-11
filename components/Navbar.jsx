@@ -25,7 +25,7 @@ const Navbar = () => {
         <UserButton />
       ) : (
         <div className='flex gap-3 items-center'>
-          <Link href={'/dashboard'}>
+          <Link href={'/sign-up'}>
             <Button
               variant={'outline'}
               className={'rounded-full bg-purple-50 hover:cursor-grab'}
@@ -33,7 +33,7 @@ const Navbar = () => {
               Dashboard
             </Button>
           </Link>
-          <Link href={'/dashboard'}>
+          <Link href={'/sign-in'}>
             <Button
               variant={'outline'}
               className={

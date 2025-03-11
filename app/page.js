@@ -1,4 +1,4 @@
-import Hero from '@/components/Hero'
+import Hero from '../components/Hero'
 import Navbar from '../components/Navbar'
 
 export default function Home() {
@@ -11,6 +11,8 @@ export default function Home() {
       }}
     >
       <Navbar />
+      {console.log(process.env.DATABASE_URL)}
+      {console.log('Fuad')}
       <Hero />
     </div>
   )

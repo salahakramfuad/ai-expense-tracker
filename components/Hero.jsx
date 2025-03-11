@@ -12,7 +12,7 @@ const Hero = () => {
               Manage Your Money With personal AI Assistant
               <br />
               <span className='text-4xl md:text-[6rem] text-purple-900 font-bold mt-1 leading-none'>
-                Mr. Walet Manager
+                Mr. Wallet Manager
               </span>
             </h1>
           </>

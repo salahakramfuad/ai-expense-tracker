@@ -3,9 +3,9 @@ import { defineConfig } from 'drizzle-kit'
 
 export default defineConfig({
   out: './drizzle',
-  schema: '/lib/db/schema.ts',
+  schema: 'db/schema.ts',
   dialect: 'postgresql',
   dbCredentials: {
-    url: process.env.DATABASE_URL!
+    url: 'postgresql://walletmanager_owner:npg_pxdJfnX7Ql9Z@ep-cool-credit-a1sy03g7.ap-southeast-1.aws.neon.tech/walletmanager?sslmode=require'
   }
 })

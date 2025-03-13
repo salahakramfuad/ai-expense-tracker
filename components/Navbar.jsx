@@ -43,7 +43,7 @@ const Navbar = () => {
               Dashboard
             </Button>
           </Link>
-          <Link href={'/sign-up'}>
+          <Link href={'/dashboard'}>
             <Button
               variant={'outline'}
               className={

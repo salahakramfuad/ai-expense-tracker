@@ -1,43 +1,40 @@
 'use client'
 
-import { useUser } from '@clerk/nextjs'
 import DashboardHeader from '../../../components/DashboardHeader'
 import SideNav from '../../../components/SideNav'
-import { useRouter } from 'next/navigation' // ✅ FIXED!
+import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import { useUser } from '@clerk/nextjs' // ✅ Import Clerk user hook
 
 const Layout = ({ children }) => {
-  const { user } = useUser()
-  const { isSignedIn, isLoaded } = useUser()
   const router = useRouter()
-  const [loading, setLoading] = useState(true)
+  const { user, isSignedIn } = useUser() // ✅ Get user info
 
   useEffect(() => {
-    if (!isLoaded) return
-    if (!isSignedIn) {
-      router.replace('/') // Redirect to homepage if not logged in
+    if (isSignedIn) {
+      checkUserBudget()
     } else {
-      setLoading(false) // Allow access to the dashboard
+      router.replace('/dashboard') // ✅ Redirect if not signed in
     }
-  }, [isSignedIn, isLoaded, router])
-
-  if (!isLoaded || loading) {
-    return <loading />
-  }
-
-  useEffect(() => {
-    if (user) checkUserBudget()
-  }, [user])
+  }, [isSignedIn]) // ✅ Run when sign-in state changes
 
   const checkUserBudget = async () => {
-    const result = await db
-      .select()
-      .from(budget)
-      .where(eq(Budgets.createdBy, user?.primaryEmailAddress?.emailAddress))
+    try {
+      const response = await fetch('/api/check-budget', {
+        method: 'POST',
+        body: JSON.stringify({
+          email: user?.primaryEmailAddress?.emailAddress
+        }),
+        headers: { 'Content-Type': 'application/json' }
+      })
 
-    console.log(result)
-    if (result?.length === 0) {
-      router.replace('/dashboard/budgets')
+      const { hasBudget } = await response.json()
+
+      if (!hasBudget) {
+        router.replace('/dashboard/budgets') // ✅ Redirect if no budget
+      }
+    } catch (error) {
+      console.error('Error checking budget:', error)
     }
   }
 

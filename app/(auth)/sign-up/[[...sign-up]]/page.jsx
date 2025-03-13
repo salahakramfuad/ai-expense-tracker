@@ -9,13 +9,6 @@ const Page = () => {
   const { isSignedIn } = useUser()
   const router = useRouter()
 
-  // Redirect to dashboard after successful sign-up
-  useEffect(() => {
-    if (isSignedIn) {
-      router.push('/dashboard')
-    }
-  }, [isSignedIn, router])
-
   return (
     <div className='flex h-screen bg-purple-50'>
       {/* Left Side Image */}

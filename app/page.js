@@ -11,8 +11,7 @@ export default function Home() {
       }}
     >
       <Navbar />
-      {console.log(process.env.DATABASE_URL)}
-      {console.log('Fuad')}
+
       <Hero />
     </div>
   )

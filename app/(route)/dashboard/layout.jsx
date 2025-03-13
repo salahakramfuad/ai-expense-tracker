@@ -7,9 +7,23 @@ import { useRouter } from 'next/navigation' // ✅ FIXED!
 import { useEffect } from 'react'
 
 const Layout = ({ children }) => {
-  // ✅ Accepts children prop
   const { user } = useUser()
+  const { isSignedIn, isLoaded } = useUser()
   const router = useRouter()
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    if (!isLoaded) return
+    if (!isSignedIn) {
+      router.replace('/') // Redirect to homepage if not logged in
+    } else {
+      setLoading(false) // Allow access to the dashboard
+    }
+  }, [isSignedIn, isLoaded, router])
+
+  if (!isLoaded || loading) {
+    return <loading />
+  }
 
   useEffect(() => {
     if (user) checkUserBudget()

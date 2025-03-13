@@ -1,13 +1,25 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import Image from 'next/image'
-import { SignIn } from '@clerk/nextjs'
+import { SignIn, useUser } from '@clerk/nextjs'
+import { useRouter } from 'next/navigation'
 
 const Page = () => {
+  const { isSignedIn } = useUser()
+  const router = useRouter()
+
+  // Redirect to dashboard after successful sign-in
+  useEffect(() => {
+    if (isSignedIn) {
+      router.push('/dashboard')
+    }
+  }, [isSignedIn, router])
+
   return (
     <div className='flex h-screen bg-purple-50'>
-      <div className='flex-1 relative'>
+      {/* Left Side Image */}
+      <div className='flex-1 relative hidden md:block'>
         <Image
           src='/Images/signin.jpg'
           alt='Sign In Image'
@@ -15,8 +27,10 @@ const Page = () => {
           objectFit='cover'
         />
       </div>
+
+      {/* Right Side Sign-In Form */}
       <div className='flex-1 flex justify-center items-center'>
-        <SignIn redirectUrl='/dashboard' />
+        <SignIn />
       </div>
     </div>
   )

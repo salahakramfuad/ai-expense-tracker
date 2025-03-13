@@ -6,9 +6,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 const Navbar = () => {
-  const { user, isSignedIn } = useUser()
+  const { isSignedIn } = useUser()
   return (
-    <div className='p-4 flex justify-between items-center  px-10 bg='>
+    <div className='p-4 flex justify-between items-center px-10 bg'>
       <div className='flex'>
         <Image
           src='/logo/logo.png'
@@ -22,10 +22,9 @@ const Navbar = () => {
       </div>
 
       {isSignedIn ? (
-        <UserButton />
-      ) : (
         <div className='flex gap-3 items-center'>
-          <Link href={'/sign-up'}>
+          <UserButton />
+          <Link href={'/dashboard'}>
             <Button
               variant={'outline'}
               className={'rounded-full bg-purple-50 hover:cursor-grab'}
@@ -33,7 +32,18 @@ const Navbar = () => {
               Dashboard
             </Button>
           </Link>
+        </div>
+      ) : (
+        <div className='flex gap-3 items-center'>
           <Link href={'/sign-in'}>
+            <Button
+              variant={'outline'}
+              className={'rounded-full bg-purple-50 hover:cursor-grab'}
+            >
+              Dashboard
+            </Button>
+          </Link>
+          <Link href={'/sign-up'}>
             <Button
               variant={'outline'}
               className={
